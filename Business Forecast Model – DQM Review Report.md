@@ -36,7 +36,7 @@ No formal documentation was available for the DQM. The review was therefore base
 
 - Discussions with the DQM owner.
 - The identification form completed by the owner.
-- A review of the Excel file, including the "WAM Base Case ICARA scenario" and "Assumptions" tabs.
+- A review of the Excel file, covering all tabs except the stress scenario tabs, which are assessed separately.
 
 &#91;Add any testing performed, e.g. recalculation or reasonableness checks.\]
 
@@ -50,6 +50,21 @@ The Business Forecast Model is an Excel-based tool that produces five-year forec
 - **Upside forecast**, which reflects the Bank's growth ambitions for the WAM division.
 
 The understanding set out in this report is based on discussions with the DQM owner, the identification form completed by the owner, and a review of the Excel file. No formal documentation was available for the DQM; this is addressed in Section 7.
+
+**Workbook structure.** The Excel file is organised into the tabs below. The annual forecast covers 2026 to 2031, and the current year is also phased monthly. \[Confirm where the upside forecast is held, as it does not appear as a separate tab.\]
+
+| Group | Tab | Purpose |
+| --- | --- | --- |
+| Inputs and assumptions | AUM (hidden) | Hard-coded AUM values as at September 2025, used as the forecast starting point. |
+| Inputs and assumptions | Assumptions | Narrative notes on the main assumptions. Not linked to the calculation tabs. |
+| Annual forecast | HWAM Base Case ICARA Scenarios | Annual operating P&L forecast for 2026 to 2031, covering AUM, yields, customers, income, costs and operating profit. |
+| Annual forecast | Base ICARA | Annual customer acquisition and attrition forecast: customer numbers, average AUM per client, and inflows and outflows. |
+| Current year | Monthly Phased | Annual 2026 base case divided equally across the 12 months. |
+| Current year | 2026 P&L Revised | Monthly 2026 operating P&L, with actuals to June and forecast values from July. |
+| Current year | Monthly Phased ICARA | Monthly 2026 operating P&L, cash, wind-down and capital metrics used for ICARA. |
+| Outputs | Summary revised | Annual summary of income, costs, operating profit, FTE and AUM, with growth rates and charts. |
+| Stress scenarios | ICARA S1, ICARA S2, S1 Summary, S2 Summary | Stressed versions of the ICARA scenario and their summaries. Assessed separately. |
+| Apparent duplicates | HWAM Base Case, Base Case, Summary, Monthly | Appear to replicate HWAM Base Case ICARA Scenarios, Base ICARA, Summary revised and Monthly Phased respectively. |
 
 ### 3.2 Business Use and Intended Purpose
 
@@ -80,7 +95,7 @@ During the identification phase, the owner classified the Business Forecast Mode
 
 The tool produces forecasts and relies on expert judgement-based assumptions. Both characteristics are consistent with the SS1/23 model definition and do not, in themselves, determine the classification. The determining factor is the nature of the processing performed by the tool.
 
-The tool does not apply statistical estimation or any statistical, economic or financial technique to derive its outputs. Assumptions are hard-coded as fixed inputs, with some recorded and briefly explained in the "Assumptions" tab of the Excel file. The tool then applies simple arithmetic calculations to these inputs. For example, in the "WAM Base Case ICARA scenario" tab, yearly closing Assets under Management (AUM) are calculated as the previous year's closing AUM plus inflows, less outflows, plus or minus market performance. Market performance is calculated by applying a fixed 5% market performance assumption to Multi Asset Funds (MAF), and outflows are calculated using an assumed annual rate of customer attrition.
+The tool does not apply statistical estimation or any statistical, economic or financial technique to derive its outputs. Assumptions are hard-coded as fixed inputs, with some recorded and briefly explained in the "Assumptions" tab of the Excel file. The tool then applies simple arithmetic calculations to these inputs. For example, in the "HWAM Base Case ICARA Scenarios" tab, yearly closing Assets under Management (AUM) are calculated as the previous year's closing AUM plus inflows, less outflows, plus or minus market performance. Market performance is calculated by applying a fixed 5% market performance assumption to Multi Asset Funds (MAF), and outflows are calculated using an assumed annual rate of customer attrition.
 
 The tool's outputs are therefore fully determined by its inputs, and the uncertainty in the forecasts arises from the assumptions rather than from the method used to process them. On this basis, the Business Forecast Model is classified as a Deterministic Quantitative Method (DQM). Given its High materiality and the use of its outputs in ICARA capital and liquidity planning and the annual Value in Use exercise, relevant aspects of the MRM framework are applied proportionately through this review.
 
@@ -94,24 +109,75 @@ The DQM is owned by the Head of Finance Wealth (UKEW). \[Confirm whether the own
 
 ### 5.1 Inputs and Data Sources
 
-&#91;To be completed.\] Notes gathered so far:
+The DQM uses the following inputs, all entered manually as hard-coded values:
 
-- The starting point of the current forecast is AUM as at September 2025, assumed to remain static until the end of the year.
-- &#91;Add data sources, how they are obtained, and any manual steps.\]
+- **Starting AUM:** AUM as at September 2025, held in the hidden "AUM" tab and assumed to remain static until the end of 2025. The 2025 closing AUM forms the 2026 opening AUM.
+- **Current-year actuals:** monthly operating P&L actuals for January to June 2026, entered as values in the "2026 P&L Revised" tab.
+- **Prior-year starting points:** 2025 income and cost levels, 2025 average wages and FTE, used as the base for most income and cost lines.
+- **Economic and business parameters:** inflation, salary inflation, the own cash at bank interest rate, the protection income growth rate, the bonus growth rate and IT FTE, hard-coded in the "HWAM Base Case" tabs.
+- **Bank-level inputs:** total Bank customer numbers and their growth, used to drive new customer numbers.
+- **Historical analysis performed outside the tool:** customer acquisition over the last two years, historical margins, prior-year customer flows, three-year fee averages and the five-year historical average return of a balanced fund. These inform the assumptions but are not held in the workbook.
+
+&#91;Add data sources, how they are extracted, and any reconciliation to the general ledger or source systems.\]
 
 ### 5.2 Calculation Logic and Assumptions
 
-&#91;To be completed.\] Notes gathered so far:
+The calculations follow a single flow: customer numbers and AUM drive income, FTE drives most costs, and operating profit is total income less total costs. The annual forecast is calculated in the "HWAM Base Case ICARA Scenarios" and "Base ICARA" tabs and then phased monthly for the current year. All calculations are arithmetic applications of the assumptions described below. The "Assumptions" tab records the rationale for most assumptions, but is not linked to the calculation tabs.
 
-- Yearly closing AUM = previous year's closing AUM + inflows − outflows ± market performance.
-- Market performance applies a fixed 5% assumption to Multi Asset Funds (MAF).
-- Outflows are based on an assumed annual rate of customer attrition.
-- Assumptions are hard-coded. Some are recorded and briefly explained in the "Assumptions" tab; rationales are largely qualitative and vary in level of detail.
-- The Business Flows assumption reuses the metrics from the previous forecast, as the customer mapping to relevant segmentation has not been refreshed.
+**Customers and AUM**
+
+- Multi Asset Fund (MAF) customers are split into three categories aligned with the Bank's segmentation and assigned by CON-ID: Asset Rich Grey, High Income Professionals, and Other (all remaining individuals, corporates and trusts). Flows are split between new or closed customers and existing customers.
+- New Asset Rich Grey and High Income Professional customer numbers are based on acquisition over the last two years, expressed as a percentage of total Bank customers, and grow in line with Bank growth. This represents an "as is" view with no change in strategy. New customer numbers are multiplied by the historical average deposit, plus market growth, to give new customer inflows. Inflow growth rates of 0.7% (Asset Rich Grey) and 0.6% (High Income Professionals) are applied across all years. No growth is assumed for Other.
+- Inflows and outflows for existing customers are based on prior-year actuals as a percentage of total brought-forward MAF AUM.
+- Closing AUM for each year is calculated as opening AUM plus inflows, less outflows, plus or minus market performance. A fixed market growth assumption of 5% is applied to MAF, set as the lower of expected fund performance net of fees (5.4%) and the five-year historical average return of a balanced fund, unchanged from the prior forecast.
+- Cash & Equivalents (C&E) and Segregated portfolios have no forecast flows and grow with inflation. TPD and SHB Pension balances are assumed to be fully redeemed in 2025.
+
+**Income**
+
+- Investment income is calculated by applying yields, based on historical margins, to AUM.
+- Overseas custody and dealing fees start from a three-year average and grow in line with market growth.
+- Interest income applies the own cash at bank interest rate (hard-coded, based on current base rate assumptions with 100% pass-through) to an assumed average balance of £15m.
+- Wealth advice and tax advice income are held at 2025 levels, increased by inflation.
+- Protection income grows at a hard-coded rate of 35%, kept flat across all years and described as based on historical growth.
+
+**Costs**
+
+- Salaries, employer's National Insurance and benefits are calculated as FTE multiplied by the 2025 average wage, increased by salary inflation. FTE grows with customer numbers at one CD per 150 customers and one support staff member per two CDs. Five financial crime FTE are added in 2026 to support AML work and removed in 2027.
+- Bonuses start from £200k proposed to the Remuneration Committee for 2025, plus a 34.95 \[confirm unit\] uplift for tax and benefits, and grow with FTE and inflation.
+- Rent and premises costs are a headcount recharge for both office locations, increased by inflation.
+- Computer, communication, travel and entertainment, advertising and supplies costs are 2025 levels plus inflation. Purchased services and other internal expenses are 2025 levels plus inflation, after removing AML and system upgrade costs. One-off costs of £500k for AML remediation and £670k for system updates are forecast for 2026.
+- Internal IT staff costs are calculated as hard-coded FTE multiplied by the 2025 average wage, increased by salary inflation.
+- Other expenses apply 20% VAT and a 90% irrecoverable VAT rate to accounts payable costs.
+- &#91;Add the basis for depreciation and impairment.\]
+
+**Current-year phasing and actuals**
+
+- The "Monthly Phased" tab divides the annual 2026 base case equally across the 12 months.
+- The "2026 P&L Revised" tab shows the 2026 annual forecast, linked to the "HWAM Base Case ICARA Scenarios" tab, alongside the monthly operating P&L. January to June are populated with actual values; July to December use simple formulas and links to other tabs. The tab appears to be updated with actuals as they become available. \[Confirm with the owner.\]
+
+**ICARA capital and liquidity view**
+
+The "Monthly Phased ICARA" tab extends the current-year operating P&L into capital and liquidity measures:
+
+- Cash at central bank is rolled forward using the monthly cashflow to give total cash movement and the cash balance.
+- Wind-down amounts are calculated at 110%, 125% and 150% of a hard-coded value with no documented source. The cash balance divided by this value gives the "% over liquid assets".
+- The equity balance is shown, together with wind-down as a percentage of own funds.
+- A summary table feeds the "Capital Forecast 2026" chart, covering minimum requirements, own funds and liquidity under the updated base and the base case, divergence, and BRT. \[Confirm what the hard-coded wind-down value represents and what BRT refers to.\]
+
+**Stress scenarios**
+
+&#91;To be completed: ICARA S1 and S2 scenarios and their summaries.\]
 
 ### 5.3 Outputs and Their Use
 
-&#91;To be completed: outputs produced, frequency, and where they are used.\]
+The DQM produces the following outputs:
+
+- **Annual P&L summary** ("Summary revised" tab): average AUM, investment and other income, external and internal costs, depreciation and impairment, total costs, operating profit and FTE for each forecast year, with annual growth rates.
+- **P&L and AUM forecasts and charts:** total income, total expenses and profit before tax; AUM by MAF, C&E and Segregated; and the AUM mix.
+- **Current-year monthly P&L** ("2026 P&L Revised" tab), combining actuals and forecast.
+- **ICARA capital and liquidity metrics** ("Monthly Phased ICARA" tab): cash balance, wind-down amounts, own funds and liquidity against minimum requirements, and the "Capital Forecast 2026" chart.
+
+These outputs feed ICARA capital and liquidity planning, the annual Value in Use exercise, and performance monitoring against the upside forecast. \[Confirm which tabs are used as the source for each downstream use.\]
 
 ### 5.4 Implementation Testing
 
@@ -155,6 +221,10 @@ The absence of documentation is confirmed as a finding. Other rows are candidate
 | F2 | Inventory record is incomplete and classifies the tool as a model. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
 | F3 | Assumptions are hard-coded and only partially documented, with largely qualitative rationales. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
 | F4 | Customer mapping to segmentation has not been refreshed; previous forecast metrics are reused. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
+| F5 | The "Assumptions" tab is not linked to the calculation tabs, so the documented assumptions can diverge from the values actually used. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
+| F6 | The workbook contains apparent duplicate tabs (e.g. "Summary" and "Summary revised"), creating a risk that outputs are taken from an out-of-date tab. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
+| F7 | Key inputs are hard-coded without a documented source, including the wind-down value in "Monthly Phased ICARA" and the hidden "AUM" tab. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
+| F8 | Some assumptions refer to past periods (e.g. TPD and SHB Pension redemption in 2025, the 2025 bonus starting point), and may not have been refreshed for the current forecast. | Candidate | \[TBC\] | \[TBC\] | \[TBC\] | \[TBC\] |
 
 ## 8. DQM Risk Rating
 
@@ -179,7 +249,7 @@ The absence of documentation is confirmed as a finding. Other rows are candidate
 ### Appendix A: Documents Reviewed
 
 - DQM identification form, completed by the owner.
-- Business Forecast Model Excel file, including the "WAM Base Case ICARA scenario" and "Assumptions" tabs.
+- Business Forecast Model Excel file (tabs listed in Section 3.1).
 - &#91;Add any other documents or evidence.\]
 
 ### Appendix B: Testing Details
